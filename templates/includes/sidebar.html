@@ -8,13 +8,13 @@
           </a>
       </li>
       <li class="list-group-item">
-        <a href="{% url 'logout'%}?next={{request.path}}">
+        <a href="{% url 'logout' %}">
           Logout
         </a>
       </li>
     {% else %}
       <li class="list-group-item">
-        <a href="{% url 'login'%}?next={{request.path}}">
+        <a href="{% url 'login' %}?next={{ request.path }}">
           Login
         </a>
       </li>
