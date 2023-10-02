@@ -12,7 +12,8 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault(
-    "DJANGO_SETTINGS_MODULE", "cossack_restaurant_kitchen_service_py_django.settings"
+    "DJANGO_SETTINGS_MODULE", "cossack_restaurant_kitchen_service_py_django"
+                              ".settings"
 )
 
 application = get_wsgi_application()
