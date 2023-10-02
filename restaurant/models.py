@@ -51,12 +51,14 @@ class Dish(models.Model):
     ingredients = models.ManyToManyField(
         Ingredient, related_name='dishes_include'
     )
-    cookers = models.ManyToManyField(settings.AUTH_USER_MODEL)
+    cookers = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name="dishes"
+    )
 
     @property
     def price(self):
-        total_price = self.ingredients.aggregate(Sum("price"))[
-                          "price__sum"] or 0
+        total_price = self.ingredients.aggregate(
+            Sum("price"))["price__sum"] or 0
         return total_price * 2
 
     def __str__(self):

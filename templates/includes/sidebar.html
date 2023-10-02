@@ -1,5 +1,25 @@
 {% block sidebar %}
-  <ul class="nav flex-column">
+  <ul class="sidebar-nav list-group">
+    {% if user.is_authenticated %}
+      <li class="list-group-item">
+        User:
+          <a href="{% url 'restaurant:cook-detail' pk=user.id %}">
+            {{ user.get_username }}
+          </a>
+      </li>
+      <li class="list-group-item">
+        <a href="{% url 'logout'%}?next={{request.path}}">
+          Logout
+        </a>
+      </li>
+    {% else %}
+      <li class="list-group-item">
+        <a href="{% url 'login'%}?next={{request.path}}">
+          Login
+        </a>
+      </li>
+    {% endif %}
+  <br>
     <li class="list-group-item">
       <a href="{% url 'restaurant:index' %}">
         Home
@@ -11,7 +31,7 @@
       </a>
     </li>
     <li class="list-group-item">
-      <a href="#">
+      <a href="{% url 'restaurant:cook-list' %}">
         Cookers
       </a>
     </li>
