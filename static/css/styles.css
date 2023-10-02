@@ -1,0 +1,7 @@
+body {
+    margin-top: 20px;
+    background-image: url('/static/images/background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+

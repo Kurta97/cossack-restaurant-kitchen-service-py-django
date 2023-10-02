@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Cossack restaurant kitchen service</h1>
+    <p>Main information about us:</p>
+    <ul>
+        <li><strong>Cookers:</strong> {{ num_cookers }}</li>
+        <li><strong>Number of dishes:</strong> {{ num_dishes }}</li>
+        <li><strong>Average years of cookers experience:</strong> {{ average_experience }}</li>
+        <li><strong>Average price of dish:</strong> {{ average_price }} pln</li>
+    </ul>
+
+    <p>You have visited home page
+        {{ num_visits }} time{{ num_visits|pluralize }}.
+    </p>
+
+{% endblock %}
