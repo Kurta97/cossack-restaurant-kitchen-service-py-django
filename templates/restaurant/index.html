@@ -2,16 +2,28 @@
 
 {% block content %}
     <h1>Cossack restaurant kitchen service</h1>
-    <p>Main information about us:</p>
+    <hr>
+    <br>
+    <h3>Main information about us:</h3>
+    <br>
+    <p class="description"><i>
+      "Cossack" is a Ukrainian restaurant nestled in the heart of Warsaw.
+      We bring the authentic flavors of Ukraine to the vibrant culinary scene of the city.
+      Explore traditional dishes, from hearty borscht to savory pierogies, all made with fresh, locally sourced ingredients.
+      Immerse yourself in a cozy Ukrainian village atmosphere, where warm hospitality awaits.
+      Join us at Cossack in Warsaw for a taste of Ukraine's rich culinary heritage.
+    </i></p>
+    <br>
     <ul>
         <li><strong>Cookers:</strong> {{ num_cookers }}</li>
         <li><strong>Number of dishes:</strong> {{ num_dishes }}</li>
         <li><strong>Average years of cookers experience:</strong> {{ average_experience }}</li>
         <li><strong>Average price of dish:</strong> {{ average_price }} pln</li>
     </ul>
-
-    <p>You have visited home page
-        {{ num_visits }} time{{ num_visits|pluralize }}.
+    <br>
+    <p>
+      <i>You have visited home page
+        {{ num_visits }} time{{ num_visits|pluralize }}.</i>
     </p>
 
 {% endblock %}

@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Avg
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -10,8 +10,11 @@ from restaurant.forms import (
     CookCreationForm,
     CookUpdateForm,
     CookSearchForm,
+    IngredientSearchForm,
+    DishForm,
+    DishSearchForm,
 )
-from restaurant.models import Cook, Dish
+from restaurant.models import Cook, Dish, Ingredient
 
 
 @login_required
@@ -40,7 +43,7 @@ def index(request: HttpRequest) -> HttpResponse:
 
 class CookListView(LoginRequiredMixin, generic.ListView):
     model = Cook
-    paginate_by = 5
+    paginate_by = 10
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(CookListView, self).get_context_data(**kwargs)
@@ -84,3 +87,101 @@ class CookDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Cook
     success_url = reverse_lazy("restaurant:cook-list")
     context_object_name = 'cooker'
+
+
+class IngredientListView(LoginRequiredMixin, generic.ListView):
+    model = Ingredient
+    context_object_name = "ingredient_list"
+    template_name = "restaurant/ingredient_list.html"
+    paginate_by = 10
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(IngredientListView, self).get_context_data(**kwargs)
+        name = self.request.GET.get("name", "")
+        context["search_form"] = IngredientSearchForm(
+            initial={"name": name}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = Ingredient.objects.all()
+        form = IngredientSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(
+                name__icontains=form.cleaned_data["name"]
+            )
+        return queryset
+
+
+class IngredientCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Ingredient
+    fields = "__all__"
+    success_url = reverse_lazy("restaurant:ingredient-list")
+
+
+class IngredientUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Ingredient
+    fields = "__all__"
+    success_url = reverse_lazy("restaurant:ingredient-list")
+
+
+class IngredientDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Ingredient
+    success_url = reverse_lazy("restaurant:ingredient-list")
+
+
+class DishListView(LoginRequiredMixin, generic.ListView):
+    model = Dish
+    paginate_by = 10
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(DishListView, self).get_context_data(**kwargs)
+        name = self.request.GET.get("model", "")
+        context["search_form"] = DishSearchForm(
+            initial={"name": name}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = Dish.objects.all()
+        form = DishSearchForm(self.request.GET)
+        if form.is_valid():
+            return queryset.filter(
+                name__icontains=form.cleaned_data["name"]
+            )
+        return queryset
+
+
+class DishDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Dish
+
+
+class DishCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Dish
+    form_class = DishForm
+    success_url = reverse_lazy("restaurant:dish-list")
+
+
+class DishUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Dish
+    form_class = DishForm
+    success_url = reverse_lazy("restaurant:dish-list")
+
+
+class DishDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Dish
+    success_url = reverse_lazy("restaurant:dish-list")
+
+
+@login_required
+def toggle_assign_to_dish(request, pk):
+    cooker = Cook.objects.get(id=request.user.id)
+    if (
+        Dish.objects.get(id=pk) in cooker.dishes.all()
+    ):
+        cooker.dishes.remove(pk)
+    else:
+        cooker.dishes.add(pk)
+    return HttpResponseRedirect(
+        reverse_lazy("restaurant:dish-detail", args=[pk])
+    )

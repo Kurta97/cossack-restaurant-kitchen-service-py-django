@@ -1,32 +1,33 @@
 {% extends "base.html" %}
-
+{% block title %}<title>Cooker detail</title>{% endblock %}
 {% block content %}
   <h1>
     Username: {{ cooker.username }}
-    <a href="{% url 'restaurant:cook-delete' pk=cooker.id %}" class="btn btn-danger link-to-page">
-      Delete
-    </a>
-
-    <a href="{% url 'restaurant:cook-update' pk=cooker.id %}" class="btn btn-secondary link-to-page">
-      Update cooker info
-    </a>
+    <hr>
   </h1>
-
+  <br>
   <p><strong>First name:</strong> {{ cooker.first_name }}</p>
   <p><strong>Last name:</strong> {{ cooker.last_name }}</p>
   <p><strong>Years of experience:</strong> {{ cooker.years_of_experience}}</p>
+  <br>
 
   <div class="ml-3">
-    <h4>Dishes</h4>
-
+  <h1>Dishes</h1>
+  <hr>
+  <br>
+    <ul>
     {% for dish in cooker.dishes.all %}
-        <hr>
-        <p><strong>Dish:</strong> {{ dish.name }}</p>
-        <p><strong>Price:</strong> {{ dish.price }}</p>
-        <p class="text-muted"><strong>Id:</strong> {{dish.id}}</p>
+      <li><a href="{% url 'restaurant:dish-detail' pk=dish.id %}"> {{ dish.name }} </a></li>
     {% empty %}
       <p>No dishes!</p>
     {% endfor %}
-
+    </ul>
+  <br>
+    <a href="{% url 'restaurant:cook-delete' pk=cooker.id %}" class="btn btn-danger link-to-page">
+      Delete
+    </a>
+    <a href="{% url 'restaurant:cook-update' pk=cooker.id %}" class="btn btn-primary link-to-page">
+      Update cooker info
+    </a>
   </div>
 {% endblock %}

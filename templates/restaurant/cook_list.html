@@ -1,17 +1,22 @@
 {% extends "base.html" %}
+{% block title %}<title>Cookers</title>{% endblock %}
 {% load crispy_forms_filters %}
 
 {% block content %}
   <h1>
     List of cookers
-    <a href="{% url 'restaurant:cook-create' %}" class="btn btn-primary link-to-page">
+    <a href="{% url 'restaurant:cook-create' %}" class="btn btn-primary link-to-page" style="float: right">
       Create
     </a>
+  <hr>
   </h1>
-  <form class="form-inline" method="get" action="">
+  <br>
+  <form method="get" action="" class="form-inline">
     {{ search_form|crispy }}
     <input class="btn btn-secondary" type="submit" value="🔍">
   </form>
+  <br>
+  <br>
   {% if cook_list %}
   <table class="table">
     <tr>
@@ -36,6 +41,7 @@
     </tr>
   {% endfor %}
   </table>
+    <br>
   {% else %}
     <p>
       There are no cookers in the restaurant...

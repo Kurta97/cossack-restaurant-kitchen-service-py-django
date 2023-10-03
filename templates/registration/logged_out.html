@@ -1,7 +1,9 @@
 {% extends "base.html" %}
+{% block title %}<title>Logged out from Cossack service</title>{% endblock %}
 
 {% block content %}
-  <p>Logged out!</p>
+  <h1>Logged out!</h1>
+  <hr>
   <a href="{% url 'login'%}">
     Click here to login again.
   </a>

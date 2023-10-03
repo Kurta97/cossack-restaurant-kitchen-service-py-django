@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}<title>Dish detail</title>{% endblock %}
+{% block content %}
+  <h1>Ingredients
+  {% if user in dish.cookers.all %}
+    <a class="btn btn-danger link-to-page" style="float: right" href="{% url 'restaurant:toggle-dish-assign' pk=dish.id %}">
+      Delete me from this dish
+    </a>
+  {% else %}
+    <a class="btn btn-success link-to-page" style="float: right" href="{% url 'restaurant:toggle-dish-assign' pk=dish.id %}">
+      Assign me to this dish
+    </a>
+  {% endif %}
+  </h1>
+  <hr>
+  <br>
+
+    <ul>
+      {% for ingredient in dish.ingredients.all %}
+        <li>{{ ingredient.name }}</li>
+      {% endfor %}
+    </ul>
+  <br>
+  <h1>Cookers</h1>
+  <hr>
+  <br>
+    <ul>
+    {% for cooker in dish.cookers.all %}
+      <li><a href="{% url 'restaurant:cook-detail' pk=cooker.id %}"> {{ cooker.username }} </a></li>
+    {% endfor %}
+    </ul>
+  <br>
+  <h1>Price</h1>
+  <hr>
+  <br>
+    <li>{{ dish.price }}</li>
+  <br>
+  <br>
+  <p>
+    <a href="{% url 'restaurant:dish-update' pk=dish.id %}" class="btn btn-primary">
+      Update dish
+    </a>
+    <a href="{% url 'restaurant:dish-delete' pk=dish.id %}" class="btn btn-danger">
+      Delete dish
+    </a>
+  </p>
+{% endblock %}
