@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.db.models import Avg
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -69,18 +70,27 @@ class CookDetailView(LoginRequiredMixin, generic.DetailView):
     context_object_name = 'cooker'
 
 
-class CookCreateView(LoginRequiredMixin, generic.CreateView):
+class CookBasedView(LoginRequiredMixin, generic.CreateView):
     model = Cook
+    context_object_name = 'cooker'
+    success_url = reverse_lazy("restaurant:cook-list")
+
+    def form_valid(self, form):
+        cooker = form.save(commit=False)
+        uploaded_image = self.request.FILES.get("image")
+        if uploaded_image:
+            if isinstance(uploaded_image, InMemoryUploadedFile):
+                cooker.image = uploaded_image
+        cooker.save()
+        return super().form_valid(form)
+
+
+class CookCreateView(CookBasedView):
     form_class = CookCreationForm
-    context_object_name = 'cooker'
-    success_url = reverse_lazy("restaurant:cook-list")
 
 
-class CookUpdateView(LoginRequiredMixin, generic.UpdateView):
-    model = Cook
+class CookUpdateView(CookBasedView, generic.UpdateView):
     form_class = CookUpdateForm
-    success_url = reverse_lazy("restaurant:cook-list")
-    context_object_name = 'cooker'
 
 
 class CookDeleteView(LoginRequiredMixin, generic.DeleteView):

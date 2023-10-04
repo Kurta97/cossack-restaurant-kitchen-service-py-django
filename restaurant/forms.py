@@ -12,13 +12,14 @@ class CookCreationForm(UserCreationForm):
             "years_of_experience",
             "first_name",
             "last_name",
+            "image",
         )
 
 
 class CookUpdateForm(forms.ModelForm):
     class Meta:
         model = Cook
-        fields = ["years_of_experience"]
+        fields = ["years_of_experience", "image"]
 
 
 class CookSearchForm(forms.Form):

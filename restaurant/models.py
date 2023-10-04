@@ -28,6 +28,7 @@ class Cook(AbstractUser):
             MaxValueValidator(limit_value=50)
         ]
     )
+    image = models.ImageField(upload_to="images", blank=True)
 
     class Meta:
         verbose_name = "cooker"
@@ -54,12 +55,13 @@ class Dish(models.Model):
     cookers = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name="dishes"
     )
+    image = models.ImageField(upload_to="images", blank=True)
 
     @property
     def price(self):
         total_price = self.ingredients.aggregate(
             Sum("price"))["price__sum"] or 0
-        return total_price * 2
+        return total_price * 3
 
     def __str__(self):
         return self.name

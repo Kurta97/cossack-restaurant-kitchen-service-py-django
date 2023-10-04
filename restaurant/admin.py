@@ -23,12 +23,12 @@ class CookAdmin(UserAdmin):
     list_filter = ["years_of_experience"]
     fieldsets = UserAdmin.fieldsets + (
         (
-            "Additional info", {"fields": ("years_of_experience",)},
+            "Additional info", {"fields": ("years_of_experience", "image",)},
         ),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
         (
-            "Additional info", {"fields": ("years_of_experience",)},
+            "Additional info", {"fields": ("years_of_experience", "image",)},
         ),
     )
     search_fields = ["username"]

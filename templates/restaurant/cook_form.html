@@ -8,7 +8,7 @@
   <hr>
   </h1>
   <br>
-  <form action="" method="post" novalidate>
+  <form action="" method="post" enctype="multipart/form-data" novalidate>
   {% csrf_token %}
     {{ form|crispy }}
     <br>
