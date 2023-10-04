@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block title %}<title>Dish detail</title>{% endblock %}
 {% block content %}
-  <h1>Ingredients
   {% if user in dish.cookers.all %}
     <a class="btn btn-danger link-to-page" style="float: right" href="{% url 'restaurant:toggle-dish-assign' pk=dish.id %}">
       Delete me from this dish
@@ -11,10 +10,22 @@
       Assign me to this dish
     </a>
   {% endif %}
-  </h1>
+  {% if dish.dish_type %}
+    <h1>Type</h1>
+    <hr>
+    <br>
+      <p>{{ dish.dish_type }}</p>
+    <br>
+  {% endif %}
+
+  <h1>Description</h1>
   <hr>
   <br>
-
+    <p>{{ dish.description }}</p>
+  <br>
+  <h1>Ingredients</h1>
+  <hr>
+  <br>
     <ul>
       {% for ingredient in dish.ingredients.all %}
         <li>{{ ingredient.name }}</li>

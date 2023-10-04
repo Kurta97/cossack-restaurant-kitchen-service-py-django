@@ -2,7 +2,7 @@
   <ul class="sidebar-nav list-group">
     {% if user.is_authenticated %}
       <li class="list-group-item">
-        User:
+        <strong>User: </strong>
           <a href="{% url 'restaurant:cook-detail' pk=user.id %}">
             {{ user.get_username }}
           </a>
