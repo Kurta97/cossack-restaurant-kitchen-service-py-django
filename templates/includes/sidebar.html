@@ -6,6 +6,9 @@
           <a href="{% url 'restaurant:cook-detail' pk=user.id %}">
             {{ user.get_username }}
           </a>
+            {% if user.image %}
+              <img src="{{ user.image.url }}" alt="1" style="float: right" class="rounded-circle" height="30px">
+            {% endif %}
       </li>
       <li class="list-group-item">
         <a href="{% url 'logout' %}">

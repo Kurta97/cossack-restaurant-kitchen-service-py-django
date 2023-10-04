@@ -10,14 +10,14 @@
       Assign me to this dish
     </a>
   {% endif %}
-  {% if dish.dish_type %}
-    <h1>Type</h1>
+  <h1>Type</h1>
     <hr>
     <br>
       <p>{{ dish.dish_type }}</p>
     <br>
+  {% if dish.image %}
+  <img src="{{ dish.image.url }}" alt="1" style="float: right" class="rounded-circle" width="300px">
   {% endif %}
-
   <h1>Description</h1>
   <hr>
   <br>

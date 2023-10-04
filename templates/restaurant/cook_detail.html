@@ -5,6 +5,9 @@
     Username: {{ cooker.username }}
     <hr>
   </h1>
+  {% if cooker.image %}
+  <img src="{{ cooker.image.url }}" alt="1" style="float: right" class="rounded-circle" width="300px">
+  {% endif %}
   <br>
   <p><strong>First name:</strong> {{ cooker.first_name }}</p>
   <p><strong>Last name:</strong> {{ cooker.last_name }}</p>
