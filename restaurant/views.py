@@ -14,6 +14,7 @@ from restaurant.forms import (
     IngredientSearchForm,
     DishForm,
     DishSearchForm,
+    CombinedForm,
 )
 from restaurant.models import Cook, Dish, Ingredient
 
@@ -44,7 +45,7 @@ def index(request: HttpRequest) -> HttpResponse:
 
 class CookListView(LoginRequiredMixin, generic.ListView):
     model = Cook
-    paginate_by = 5
+    paginate_by = 8
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(CookListView, self).get_context_data(**kwargs)
@@ -72,16 +73,15 @@ class CookDetailView(LoginRequiredMixin, generic.DetailView):
 
 class CookBasedView(LoginRequiredMixin, generic.CreateView):
     model = Cook
-    context_object_name = 'cooker'
     success_url = reverse_lazy("restaurant:cook-list")
 
     def form_valid(self, form):
-        cooker = form.save(commit=False)
+        driver = form.save(commit=False)
         uploaded_image = self.request.FILES.get("image")
         if uploaded_image:
             if isinstance(uploaded_image, InMemoryUploadedFile):
-                cooker.image = uploaded_image
-        cooker.save()
+                driver.image = uploaded_image
+        driver.save()
         return super().form_valid(form)
 
 
@@ -103,7 +103,7 @@ class IngredientListView(LoginRequiredMixin, generic.ListView):
     model = Ingredient
     context_object_name = "ingredient_list"
     template_name = "restaurant/ingredient_list.html"
-    paginate_by = 5
+    paginate_by = 8
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(IngredientListView, self).get_context_data(**kwargs)
@@ -142,7 +142,7 @@ class IngredientDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class DishListView(LoginRequiredMixin, generic.ListView):
     model = Dish
-    paginate_by = 5
+    paginate_by = 8
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(DishListView, self).get_context_data(**kwargs)
@@ -153,7 +153,7 @@ class DishListView(LoginRequiredMixin, generic.ListView):
         return context
 
     def get_queryset(self):
-        queryset = Dish.objects.all()
+        queryset = Dish.objects.all().prefetch_related("ingredients")
         form = DishSearchForm(self.request.GET)
         if form.is_valid():
             return queryset.filter(
@@ -164,7 +164,6 @@ class DishListView(LoginRequiredMixin, generic.ListView):
 
 class DishDetailView(LoginRequiredMixin, generic.DetailView):
     model = Dish
-    queryset = Dish.objects.all().prefetch_related("cookers")
 
 
 class DishCreateView(LoginRequiredMixin, generic.CreateView):
@@ -195,4 +194,25 @@ def toggle_assign_to_dish(request, pk):
         cooker.dishes.add(pk)
     return HttpResponseRedirect(
         reverse_lazy("restaurant:dish-detail", args=[pk])
+    )
+
+
+def register(request):
+    if request.method == "POST":
+        combined_form = CombinedForm(request.POST)
+        if combined_form.is_valid():
+            new_user = combined_form.save(commit=False)
+            new_user.set_password(combined_form.cleaned_data["password"])
+            new_user.save()
+            return render(
+                request,
+                "registration/register_done.html",
+                {"new_user": new_user}
+            )
+    else:
+        combined_form = CombinedForm()
+    return render(
+        request,
+        "registration/register.html",
+        {"combined_form": combined_form}
     )

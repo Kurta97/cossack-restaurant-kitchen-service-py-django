@@ -20,13 +20,11 @@
     <table class="table">
     <br>
       <tr>
-        <th>ID</th>
         <th>Name</th>
         <th>Price</th>
       </tr>
       {% for dish in dish_list %}
         <tr>
-        <td>{{ dish.id }}</td>
         <td>
           <a href="{% url "restaurant:dish-detail" pk=dish.id %} ">
             {{ dish.name }}

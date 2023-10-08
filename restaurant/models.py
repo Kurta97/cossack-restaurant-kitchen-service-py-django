@@ -50,7 +50,7 @@ class Dish(models.Model):
         related_name="dishes"
     )
     ingredients = models.ManyToManyField(
-        Ingredient, related_name='dishes_include'
+        Ingredient, related_name="dishes_include"
     )
     cookers = models.ManyToManyField(
         settings.AUTH_USER_MODEL, related_name="dishes"

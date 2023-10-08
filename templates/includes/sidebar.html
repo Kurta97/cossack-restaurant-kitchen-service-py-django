@@ -1,17 +1,26 @@
+{% load static %}
 {% block sidebar %}
   <ul class="sidebar-nav list-group">
     {% if user.is_authenticated %}
       <li class="list-group-item">
-        <strong>User: </strong>
-          <a href="{% url 'restaurant:cook-detail' pk=user.id %}">
-            {{ user.get_username }}
-          </a>
-            {% if user.image %}
-              <img src="{{ user.image.url }}" alt="1" style="float: right" class="rounded-circle" height="30px">
-            {% endif %}
+    {% if user.image %}
+        <img
+            src="{{ user.image.url }}" alt="1"
+            class="rounded-circle" height="25px" width="25px"
+            style="float: left; margin-right: 10px;">
+    {% else %}
+        <img
+            src="{% static "images/cooker.jpg" %}" alt="1"
+            class="rounded-circle" height="25px" width="25px"
+            style="float: left; margin-right: 10px; border: black 2px solid"
+        >
+    {% endif %}
+    <a href="{% url 'restaurant:cook-detail' pk=user.id %}">
+        <strong>{{ user.get_username }}</strong>
+    </a>
       </li>
       <li class="list-group-item">
-        <a href="{% url 'logout' %}">
+        <a href="{% url 'login' %}">
           Logout
         </a>
       </li>

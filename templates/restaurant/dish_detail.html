@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}<title>Dish detail</title>{% endblock %}
 {% block content %}
   {% if user in dish.cookers.all %}
@@ -15,8 +16,20 @@
     <br>
       <p>{{ dish.dish_type }}</p>
     <br>
-  {% if dish.image %}
-  <img src="{{ dish.image.url }}" alt="1" style="float: right" class="rounded-circle" width="300px">
+    {% if dish.image %}
+    <img
+        src="{{ dish.image.url }}" alt="dish-image"
+        style="float: right; margin: 0 100px 100px 100px;
+        border: 10px solid black;"
+        class="rounded-circle" width="460px" height="460px"
+    >
+    {% else %}
+    <img
+        src="{% static "images/dish.png" %}" alt="dish-image"
+        style="float: right; margin: 0 100px 100px 100px;
+        border: 10px solid black;"
+        class="rounded-circle" width="460px" height="460px"
+    >
   {% endif %}
   <h1>Description</h1>
   <hr>
