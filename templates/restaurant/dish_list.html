@@ -22,6 +22,7 @@
       <tr>
         <th>Name</th>
         <th>Price</th>
+        <th>Dish type</th>
       </tr>
       {% for dish in dish_list %}
         <tr>
@@ -31,6 +32,7 @@
           </a>
         </td>
         <td>{{ dish.price }}</td>
+        <td>{{ dish.dish_type }}</td>
       </tr>
       {% endfor %}
     </table>
