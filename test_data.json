@@ -1,10 +1,24 @@
 [
   {
+    "model": "restaurant.dishtype",
+    "pk": 1,
+    "fields": {
+      "name": "Dish Type 1"
+    }
+  },
+  {
+    "model": "restaurant.dishtype",
+    "pk": 2,
+    "fields": {
+      "name": "Dish Type 2"
+    }
+  },
+  {
     "model": "restaurant.ingredient",
     "pk": 1,
     "fields": {
       "name": "Ingredient 1",
-      "price": 3
+      "price": 3.00
     }
   },
   {
@@ -12,7 +26,25 @@
     "pk": 2,
     "fields": {
       "name": "Ingredient 2",
-      "price": 2
+      "price": 2.00
+    }
+  },
+  {
+    "model": "restaurant.cook",
+    "pk": 1,
+    "fields": {
+      "username": "cook1",
+      "password": "password123",
+      "years_of_experience": 5
+    }
+  },
+  {
+    "model": "restaurant.cook",
+    "pk": 2,
+    "fields": {
+      "username": "cook2",
+      "password": "password123",
+      "years_of_experience": 10
     }
   },
   {
@@ -20,7 +52,7 @@
     "pk": 3,
     "fields": {
       "name": "Ingredient 3",
-      "price": 3
+      "price": 3.00
     }
   },
   {
@@ -30,6 +62,7 @@
       "name": "Dish 1",
       "description": "Delicious dish 1",
       "dish_type": 1,
+      "cookers": [1, 2],
       "ingredients": [1, 2, 3]
     }
   },
@@ -40,193 +73,8 @@
       "name": "Dish 2",
       "description": "Delicious dish 2",
       "dish_type": 2,
-      "ingredients": [4, 5, 6]
-    }
-  },
-  {
-    "model": "restaurant.dish",
-    "pk": 3,
-    "fields": {
-      "name": "Dish 3",
-      "description": "Delicious dish 3",
-      "dish_type": 3,
-      "ingredients": [7, 8, 9]
-    }
-  },
-  {
-    "model": "restaurant.dish",
-    "pk": 4,
-    "fields": {
-      "name": "Dish 4",
-      "description": "Delicious dish 4",
-      "dish_type": 4,
-      "ingredients": [10, 1, 2]
-    }
-  },
-  {
-    "model": "restaurant.dish",
-    "pk": 5,
-    "fields": {
-      "name": "Dish 5",
-      "description": "Delicious dish 5",
-      "dish_type": 5,
-      "ingredients": [3, 4, 5]
-    }
-  },
-  {
-    "model": "restaurant.ingredient",
-    "pk": 4,
-    "fields": {
-      "name": "Ingredient 4",
-      "price": 1
-    }
-  },
-  {
-    "model": "restaurant.ingredient",
-    "pk": 5,
-    "fields": {
-      "name": "Ingredient 5",
-      "price": 2
-    }
-  },
-  {
-    "model": "restaurant.ingredient",
-    "pk": 6,
-    "fields": {
-      "name": "Ingredient 6",
-      "price": 1
-    }
-  },
-  {
-    "model": "restaurant.ingredient",
-    "pk": 7,
-    "fields": {
-      "name": "Ingredient 7",
-      "price": 2
-    }
-  },
-  {
-    "model": "restaurant.ingredient",
-    "pk": 8,
-    "fields": {
-      "name": "Ingredient 8",
-      "price": 4
-    }
-  },
-  {
-    "model": "restaurant.ingredient",
-    "pk": 9,
-    "fields": {
-      "name": "Ingredient 9",
-      "price": 1
-    }
-  },
-  {
-    "model": "restaurant.ingredient",
-    "pk": 10,
-    "fields": {
-      "name": "Ingredient 10",
-      "price": 2
-    }
-  },
-  {
-    "model": "restaurant.dish",
-    "pk": 6,
-    "fields": {
-      "name": "Dish 6",
-      "description": "Delicious dish 6",
-      "dish_type": 1,
-      "ingredients": [7, 8, 9]
-    }
-  },
-  {
-    "model": "restaurant.dish",
-    "pk": 7,
-    "fields": {
-      "name": "Dish 7",
-      "description": "Delicious dish 7",
-      "dish_type": 2,
-      "ingredients": [10, 1, 2]
-    }
-  },
-  {
-    "model": "restaurant.dish",
-    "pk": 8,
-    "fields": {
-      "name": "Dish 8",
-      "description": "Delicious dish 8",
-      "dish_type": 3,
-      "ingredients": [3, 4, 5]
-    }
-  },
-  {
-    "model": "restaurant.dish",
-    "pk": 9,
-    "fields": {
-      "name": "Dish 9",
-      "description": "Delicious dish 9",
-      "dish_type": 4,
-      "ingredients": [6, 7, 8]
-    }
-  },
-  {
-    "model": "restaurant.dish",
-    "pk": 10,
-    "fields": {
-      "name": "Dish 10",
-      "description": "Delicious dish 10",
-      "dish_type": 5,
-      "ingredients": [9, 10, 1]
-    }
-  },
-  {
-    "model": "restaurant.dish",
-    "pk": 11,
-    "fields": {
-      "name": "Dish 11",
-      "description": "Delicious dish 11",
-      "dish_type": 1,
-      "ingredients": [2, 3, 4]
-    }
-  },
-  {
-    "model": "restaurant.dish",
-    "pk": 12,
-    "fields": {
-      "name": "Dish 12",
-      "description": "Delicious dish 12",
-      "dish_type": 2,
-      "ingredients": [5, 6, 7]
-    }
-  },
-  {
-    "model": "restaurant.dish",
-    "pk": 13,
-    "fields": {
-      "name": "Dish 13",
-      "description": "Delicious dish 13",
-      "dish_type": 3,
-      "ingredients": [8, 9, 10]
-    }
-  },
-  {
-    "model": "restaurant.dish",
-    "pk": 14,
-    "fields": {
-      "name": "Dish 14",
-      "description": "Delicious dish 14",
-      "dish_type": 4,
-      "ingredients": [1, 2, 3]
-    }
-  },
-  {
-    "model": "restaurant.dish",
-    "pk": 15,
-    "fields": {
-      "name": "Dish 15",
-      "description": "Delicious dish 15",
-      "dish_type": 5,
-      "ingredients": [4, 5, 6]
+      "cookers": [2],
+      "ingredients": [1, 3]
     }
   }
 ]
