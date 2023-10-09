@@ -83,10 +83,6 @@ class DishSearchForm(forms.Form):
 
 
 class CombinedForm(forms.ModelForm):
-    password2 = forms.CharField(
-        label="Repeat password", widget=forms.PasswordInput
-    )
-
     class Meta:
         model = Cook
         fields = ("username", "first_name", "last_name", "email", "password")
@@ -111,6 +107,3 @@ class CombinedForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["username"].help_text = None
-        self.fields["password2"].widget.attrs.update(
-            {"placeholder": "Please re-enter your password"}
-        )

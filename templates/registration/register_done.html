@@ -16,12 +16,8 @@
 <body style="height: 100vh; overflow: hidden;">
 <div class="container d-flex justify-content-center align-items-center vh-100">
     <div class="text-center" style="font-size: large">
-        <h1>Welcome {{ new_user.first_name }}!</h1>
+        <h1>Welcome {{ new_user.username }}!</h1>
         <p>Your account has been successfully created. Now you can <strong><a href="{% url 'login' %}">log in</a></strong>.</p>
     </div>
 </div>
 </body>
-
-
-
-
