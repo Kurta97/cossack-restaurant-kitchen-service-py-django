@@ -22,7 +22,7 @@ update data for all database models, and upload photos of chefs and dishes.
 Enjoy using our service!
 
 
-You should create user or use user from database after loading data form test_data.json file.
+You should create user or use user from database after loading data from test_data.json file.
 
 ## Installation
 
