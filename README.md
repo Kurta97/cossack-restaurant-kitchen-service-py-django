@@ -70,7 +70,7 @@ python manage.py runserver
 
 
 ## DB structure
-![Db structure](media/images/db_structure.png)
+![Db structure](db_structure.png)
 
 ## Demo
-![Website interface](media/images/demo.png)
+![Website interface](demo.png)
