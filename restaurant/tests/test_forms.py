@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.test import TestCase
+
+from restaurant.models import DishType, Ingredient
 from restaurant.forms import (
     CookCreationForm,
     CookUpdateForm,
@@ -7,9 +9,8 @@ from restaurant.forms import (
     IngredientSearchForm,
     DishForm,
     DishSearchForm,
-    CombinedForm)
-
-from restaurant.models import DishType, Ingredient
+    CombinedForm
+)
 
 
 class FormTests(TestCase):

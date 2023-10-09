@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
+from restaurant.models import Cook, Dish, Ingredient
 from restaurant.forms import (
     CookCreationForm,
     CookUpdateForm,
@@ -16,7 +17,6 @@ from restaurant.forms import (
     DishSearchForm,
     CombinedForm,
 )
-from restaurant.models import Cook, Dish, Ingredient
 
 
 @login_required
