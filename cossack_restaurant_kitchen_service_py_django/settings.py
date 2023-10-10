@@ -28,7 +28,10 @@ SECRET_KEY = config("SECRET_KEY")
 # DEBUG =  os.environ.get("DJANGO_DEBUG", "") is not False
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "cossack-restaurant-kitchen-service.onrender.com",
+]
 
 # Application definition
 
