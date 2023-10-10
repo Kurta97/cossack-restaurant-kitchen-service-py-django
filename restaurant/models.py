@@ -19,6 +19,9 @@ class Ingredient(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ["name"]
+
 
 class Cook(AbstractUser):
     years_of_experience = models.SmallIntegerField(
@@ -33,6 +36,7 @@ class Cook(AbstractUser):
     class Meta:
         verbose_name = "cooker"
         verbose_name_plural = "cookers"
+        ordering = ["-years_of_experience"]
 
     def __str__(self):
         return self.username
@@ -65,3 +69,6 @@ class Dish(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ["dish_type"]

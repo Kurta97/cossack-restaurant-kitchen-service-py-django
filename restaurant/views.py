@@ -64,9 +64,6 @@ class CookListView(LoginRequiredMixin, generic.ListView):
             )
         return queryset
 
-    class Meta:
-        ordering = ["-years_of_experience"]
-
 
 class CookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Cook
@@ -125,9 +122,6 @@ class IngredientListView(LoginRequiredMixin, generic.ListView):
             )
         return queryset
 
-    class Meta:
-        ordering = ["name"]
-
 
 class IngredientCreateView(LoginRequiredMixin, generic.CreateView):
     model = Ingredient
@@ -166,9 +160,6 @@ class DishListView(LoginRequiredMixin, generic.ListView):
                 name__icontains=form.cleaned_data["name"]
             )
         return queryset
-
-    class Meta:
-        ordering = ["dish_type"]
 
 
 class DishDetailView(LoginRequiredMixin, generic.DetailView):
