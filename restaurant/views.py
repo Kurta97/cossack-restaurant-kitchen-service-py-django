@@ -45,7 +45,7 @@ def index(request: HttpRequest) -> HttpResponse:
 
 class CookListView(LoginRequiredMixin, generic.ListView):
     model = Cook
-    paginate_by = 8
+    paginate_by = 7
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(CookListView, self).get_context_data(**kwargs)
@@ -63,6 +63,9 @@ class CookListView(LoginRequiredMixin, generic.ListView):
                 username__icontains=form.cleaned_data["username"]
             )
         return queryset
+
+    class Meta:
+        ordering = ["-years_of_experience"]
 
 
 class CookDetailView(LoginRequiredMixin, generic.DetailView):
@@ -103,7 +106,7 @@ class IngredientListView(LoginRequiredMixin, generic.ListView):
     model = Ingredient
     context_object_name = "ingredient_list"
     template_name = "restaurant/ingredient_list.html"
-    paginate_by = 8
+    paginate_by = 7
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(IngredientListView, self).get_context_data(**kwargs)
@@ -121,6 +124,9 @@ class IngredientListView(LoginRequiredMixin, generic.ListView):
                 name__icontains=form.cleaned_data["name"]
             )
         return queryset
+
+    class Meta:
+        ordering = ["name"]
 
 
 class IngredientCreateView(LoginRequiredMixin, generic.CreateView):
@@ -142,7 +148,7 @@ class IngredientDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 class DishListView(LoginRequiredMixin, generic.ListView):
     model = Dish
-    paginate_by = 8
+    paginate_by = 7
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(DishListView, self).get_context_data(**kwargs)
@@ -160,6 +166,9 @@ class DishListView(LoginRequiredMixin, generic.ListView):
                 name__icontains=form.cleaned_data["name"]
             )
         return queryset
+
+    class Meta:
+        ordering = ["dish_type"]
 
 
 class DishDetailView(LoginRequiredMixin, generic.DetailView):

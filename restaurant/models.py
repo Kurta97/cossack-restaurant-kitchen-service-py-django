@@ -61,7 +61,7 @@ class Dish(models.Model):
     def price(self):
         total_price = self.ingredients.aggregate(
             Sum("price"))["price__sum"] * 3 or 0
-        return int(total_price)
+        return round(total_price, 2)
 
     def __str__(self):
         return self.name
