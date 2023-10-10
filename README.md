@@ -21,8 +21,14 @@ Furthermore, through the website interface, you can assign chefs to dishes,
 update data for all database models, and upload photos of chefs and dishes. 
 Enjoy using our service!
 
+## Check it out!
 
-You should create user or use user from database after loading data from test_data.json file.
+[Cossack Kitchen Service deployed to Render](https://cossack-restaurant-kitchen-service.onrender.com/)
+
+You can you this user or create new user:
+```
+login: Good_guy
+password: 5cJS2Yqn@@rt
 
 ## Installation
 
