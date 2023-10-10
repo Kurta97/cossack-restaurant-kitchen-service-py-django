@@ -25,7 +25,7 @@ Enjoy using our service!
 
 [Cossack Kitchen Service deployed to Render](https://cossack-restaurant-kitchen-service.onrender.com/)
 
-You can you this user or create new user:
+You can use this user or create new user:
 ```
 login: Good_guy
 password: 5cJS2Yqn@@rt
