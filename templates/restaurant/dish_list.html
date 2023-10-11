@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}<title>Dishes</title>{% endblock %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <h1>
+    List of dishes
+    <a href="{% url 'restaurant:dish-create' %}" class="btn btn-primary link-to-page"  style="float: right">
+      Create
+    </a>
+  <hr>
+  </h1>
+  <br>
+  <form method="get" action="" class="form-inline">
+    {{ search_form|crispy }}
+    <input class="btn btn-secondary" type="submit" value="🔍">
+  </form>
+  <br>
+  {% if dish_list %}
+    <table class="table">
+    <br>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Dish type</th>
+      </tr>
+      {% for dish in dish_list %}
+        <tr>
+        <td>
+          <a href="{% url "restaurant:dish-detail" pk=dish.id %} ">
+            {{ dish.name }}
+          </a>
+        </td>
+        <td>{{ dish.price }} pln</td>
+        <td>{{ dish.dish_type }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <br>
+  {% else %}
+    <p>There are no dishes...</p>
+  {% endif %}
+{% endblock %}

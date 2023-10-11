@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}<title>Cooker detail</title>{% endblock %}
+{% block content %}
+  <h1>
+    Username: {{ cooker.username }}
+    <hr>
+  </h1>
+  {% if cooker.image %}
+   <img
+       src="{{ cooker.image.url }}" alt="cooker-image"
+       style="float: right; margin-right: 100px; border: 10px solid black;"
+       class="rounded-circle" width="460px" height="460px"
+   >
+  {% else %}
+    <img
+        src="{% static "images/cooker.jpg" %}" alt="dish-image"
+        style="float: right; margin: 0 100px 100px 100px;
+        border: 10px solid black;"
+        class="rounded-circle" width="460px" height="460px"
+    >
+  {% endif %}
+  <br>
+  <p><strong>First name:</strong> {{ cooker.first_name }}</p>
+  <p><strong>Last name:</strong> {{ cooker.last_name }}</p>
+  <p><strong>Years of experience:</strong> {{ cooker.years_of_experience}}</p>
+  <br>
+
+  <div class="ml-3">
+  <h1>Dishes</h1>
+  <hr>
+  <br>
+    <ul>
+    {% for dish in cooker.dishes.all %}
+      <li><a href="{% url 'restaurant:dish-detail' pk=dish.id %}"> {{ dish.name }} </a></li>
+    {% empty %}
+      <p>No dishes!</p>
+    {% endfor %}
+    </ul>
+  <br>
+    <a href="{% url 'restaurant:cook-delete' pk=cooker.id %}" class="btn btn-danger link-to-page">
+      Delete
+    </a>
+    <a href="{% url 'restaurant:cook-update' pk=cooker.id %}" class="btn btn-primary link-to-page">
+      Update cooker info
+    </a>
+  </div>
+{% endblock %}

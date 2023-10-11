@@ -1,0 +1,80 @@
+[
+  {
+    "model": "restaurant.dishtype",
+    "pk": 1,
+    "fields": {
+      "name": "Dish Type 1"
+    }
+  },
+  {
+    "model": "restaurant.dishtype",
+    "pk": 2,
+    "fields": {
+      "name": "Dish Type 2"
+    }
+  },
+  {
+    "model": "restaurant.ingredient",
+    "pk": 1,
+    "fields": {
+      "name": "Ingredient 1",
+      "price": 3.00
+    }
+  },
+  {
+    "model": "restaurant.ingredient",
+    "pk": 2,
+    "fields": {
+      "name": "Ingredient 2",
+      "price": 2.00
+    }
+  },
+  {
+    "model": "restaurant.cook",
+    "pk": 1,
+    "fields": {
+      "username": "cook1",
+      "password": "password123",
+      "years_of_experience": 5
+    }
+  },
+  {
+    "model": "restaurant.cook",
+    "pk": 2,
+    "fields": {
+      "username": "cook2",
+      "password": "password123",
+      "years_of_experience": 10
+    }
+  },
+  {
+    "model": "restaurant.ingredient",
+    "pk": 3,
+    "fields": {
+      "name": "Ingredient 3",
+      "price": 3.00
+    }
+  },
+  {
+    "model": "restaurant.dish",
+    "pk": 1,
+    "fields": {
+      "name": "Dish 1",
+      "description": "Delicious dish 1",
+      "dish_type": 1,
+      "cookers": [1, 2],
+      "ingredients": [1, 2, 3]
+    }
+  },
+  {
+    "model": "restaurant.dish",
+    "pk": 2,
+    "fields": {
+      "name": "Dish 2",
+      "description": "Delicious dish 2",
+      "dish_type": 2,
+      "cookers": [2],
+      "ingredients": [1, 3]
+    }
+  }
+]

@@ -1,0 +1,56 @@
+{% load static %}
+{% block sidebar %}
+  <ul class="sidebar-nav list-group">
+    {% if user.is_authenticated %}
+      <li class="list-group-item">
+    {% if user.image %}
+        <img
+            src="{{ user.image.url }}" alt="1"
+            class="rounded-circle" height="25px" width="25px"
+            style="float: left; margin-right: 10px;">
+    {% else %}
+        <img
+            src="{% static "images/cooker.jpg" %}" alt="1"
+            class="rounded-circle" height="25px" width="25px"
+            style="float: left; margin-right: 10px; border: black 2px solid"
+        >
+    {% endif %}
+    <a href="{% url 'restaurant:cook-detail' pk=user.id %}">
+        <strong>{{ user.get_username }}</strong>
+    </a>
+      </li>
+      <li class="list-group-item">
+        <a href="{% url 'login' %}">
+          Logout
+        </a>
+      </li>
+    {% else %}
+      <li class="list-group-item">
+        <a href="{% url 'login' %}?next={{ request.path }}">
+          Login
+        </a>
+      </li>
+    {% endif %}
+  <br>
+    <li class="list-group-item">
+      <a href="{% url 'restaurant:index' %}">
+        Home
+      </a>
+    </li>
+    <li class="list-group-item">
+      <a href="{% url 'restaurant:dish-list' %}">
+        Dishes
+      </a>
+    </li>
+    <li class="list-group-item">
+      <a href="{% url 'restaurant:cook-list' %}">
+        Cookers
+      </a>
+    </li>
+    <li class="list-group-item">
+      <a href="{% url 'restaurant:ingredient-list' %}">
+        Ingredients
+      </a>
+    </li>
+  </ul>
+{% endblock sidebar %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}<title>Cooker deletion</title>{% endblock %}
+
+{% block content %}
+  <h1>
+    Delete cooker?
+  </h1>
+  <p>
+    Are you sure you  really want to delete the cooker:
+    <b>{{ cooker.first_name }} {{ cooker.last_name }}</b>?
+  </p>
+  <p>
+    <i>
+      You should know this cooker loves our restaurant
+    </i>
+  </p>
+  <form action="" method="post">
+  {% csrf_token %}
+    <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-primary">
+      Cancel
+    </a>
+    <input class="btn btn-danger" type="submit" value="Yes, delete this cooker!">
+  </form>
+{% endblock %}
